@@ -10,7 +10,7 @@ class News extends Component {
     }
 
     componentDidMount() {
-        const url = 'https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=dc575b5e0863400aacc7c1c5e409b6b7';
+        const url = 'https://newsapi.org/v2/' + this.props.type + '&apiKey=dc575b5e0863400aacc7c1c5e409b6b7';
 
         fetch(url)
             .then((response) => {
