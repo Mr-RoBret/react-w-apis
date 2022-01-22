@@ -10,7 +10,7 @@ class News extends Component {
     }
 
     componentDidMount() {
-        const url = 'https://newsapi.org/v2/' + this.props.type + '&apiKey=dc575b5e0863400aacc7c1c5e409b6b7';
+        const url = this.props.typeURL; // get typeURL from Option selected
 
         fetch(url)
             .then((response) => {
@@ -19,7 +19,7 @@ class News extends Component {
             .then((data) => {
                 this.setState({
                     news: data.articles
-                })  
+                });  
             })
             .catch((error) => console.log(error));
     }
