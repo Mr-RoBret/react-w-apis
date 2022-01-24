@@ -34,8 +34,8 @@ class Selector extends Component {
 
     render() {
         return(
-            <div>
-                <select class="options-list" name="optionsList">
+            <div class="Options-dropdown">
+                <select class="Options-list" name="optionsList">
                     {this.renderItems()}
                 </select>
             </div>

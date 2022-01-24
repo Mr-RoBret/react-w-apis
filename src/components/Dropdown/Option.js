@@ -1,7 +1,4 @@
-import React, { Component } from 'react';
-import Selector from './Selector';
-
-
+import React from 'react';
 
 const Option = ({item}) => (
         <option value="option 1">{item.name}</option>

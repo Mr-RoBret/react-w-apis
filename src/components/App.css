@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #493d54;
   min-height: 20vh;
   display: flex;
   flex-direction: column;
@@ -22,6 +22,10 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.App-header p {
+  margin: 0px 0px 35px 0px;
 }
 
 .App-title {
@@ -32,8 +36,18 @@
   color: #61dafb;
 }
 
-.options-list {
+.Options-dropdown {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: .25rem;
+}
+
+.Options-list {
   display: block;
+  max-width: 200px;
+  border: #797979 1px solid;
+  border-radius: 5px;
 }
 
 @keyframes App-logo-spin {

@@ -1,9 +1,14 @@
 import './App.css';
 import News from './News/News';
-import Selector from './Selector';
+import Selector from './Dropdown/Selector';
+
+const url = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=dc575b5e0863400aacc7c1c5e409b6b7'
+
+const selectedSource = (selection) => {
+  return `https://newsapi.org/v2/top-headlines?${selection}&apiKey=dc575b5e0863400aacc7c1c5e409b6b7`
+}
 
 function App() {
-  const url = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=dc575b5e0863400aacc7c1c5e409b6b7'
   return (
     <div className="App">
       <header className="App-header">
@@ -11,7 +16,7 @@ function App() {
         <p>Choose your News</p>  
       </header>
       <Selector apiURL={url} />
-      <News />
+      <News selected={selectedSource} />
     </div>
   );
 }
