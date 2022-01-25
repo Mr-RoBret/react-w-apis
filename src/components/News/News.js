@@ -10,7 +10,7 @@ class News extends Component {
     }
 
     componentDidMount() {
-        const url = this.props.typeURL; // get typeURL from Option selected
+        const url = this.props.apiURL; // get typeURL from Option selected
 
         fetch(url)
             .then((response) => {
@@ -19,7 +19,7 @@ class News extends Component {
             .then((data) => {
                 this.setState({
                     news: data.articles
-                });  
+                });
             })
             .catch((error) => console.log(error));
     }
