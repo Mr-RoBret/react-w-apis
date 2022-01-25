@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Option = ({item}) => (
-        <option value="option 1">{item.name}</option>
+        <option value="option 1">{item}</option>
 )
 
 export default Option;

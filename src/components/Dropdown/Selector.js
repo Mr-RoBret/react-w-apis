@@ -27,8 +27,14 @@ class Selector extends Component {
     }
 
     renderItems() {
-        return this.state.options.map((item) => (
-                <Option key={item.source.id} item={item.source} />
+        //pare duplicates
+        const optionsNames = this.state.options.map((item) => item.source.name);
+        console.log(optionsNames);
+        const finalOptions = [...new Set(optionsNames)];
+        console.log(finalOptions);
+
+        return finalOptions.map((item) => (
+            <Option key={item.value} item={item} />
         ));
     }
 
