@@ -9,11 +9,18 @@ function App() {
   
   // const url = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=dc575b5e0863400aacc7c1c5e409b6b7';
   
+  // const handleSelection = value => () => {
+  //   console.log('we have reached the event handler');
+  //   let domainName = {value}
+  //   let newUrl = `https://newsapi.org/v2/everything?${domainName}&apiKey=dc575b5e0863400aacc7c1c5e409b6b7`
+  //   setApiUrl(newUrl);
+  // }
+  
   const handleSelection = (event) => {
     console.log('we have reached the event handler');
-    // console.log(`https://newsapi.org/v2/top-headlines?${selection}&apiKey=dc575b5e0863400aacc7c1c5e409b6b7`);
-    // return `https://newsapi.org/v2/top-headlines?${selection}&apiKey=dc575b5e0863400aacc7c1c5e409b6b7`;
-    // setApiUrl(newUrl);
+    let domainName = {event}
+    let newUrl = `https://newsapi.org/v2/everything?${domainName}&apiKey=dc575b5e0863400aacc7c1c5e409b6b7`
+    setApiUrl(newUrl);
   }
 
   return (
@@ -24,8 +31,7 @@ function App() {
       </header>
       <Selector 
         apiURL={apiUrl} 
-        onChange={handleSelection}
-        urlChange={""} 
+        onClick={handleSelection}
         />
       <News apiURL={apiUrl} />
     </div>
