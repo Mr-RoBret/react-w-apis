@@ -22,7 +22,11 @@ function App() {
         <h1 className="App-title">Bret's News Feed</h1>
         <p>Choose your News</p>  
       </header>
-      <Selector apiURL={apiUrl} onChange={handleSelection} />
+      <Selector 
+        apiURL={apiUrl} 
+        onChange={handleSelection}
+        urlChange={""} 
+        />
       <News apiURL={apiUrl} />
     </div>
   );
