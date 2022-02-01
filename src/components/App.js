@@ -31,7 +31,7 @@ function App() {
       </header>
       <Selector 
         apiURL={apiUrl} 
-        onClick={handleSelection}
+        onChange={handleSelection}
         />
       <News apiURL={apiUrl} />
     </div>

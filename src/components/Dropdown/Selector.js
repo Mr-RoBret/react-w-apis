@@ -38,7 +38,7 @@ class Selector extends Component {
 
         //return list of options using Options component
         return finalOptions.map((item) => (
-            <Option onClick={this.props.handleSelection} key={item} item={item} />
+            <Option onChange={this.props.handleSelection} key={item} item={item} />
         ));
     }
 
