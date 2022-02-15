@@ -2,25 +2,40 @@ import React, { useState } from "react";
 import './App.css';
 import News from './News/News';
 import Selector from './Dropdown/Selector';
+import NewSingle from "./News/NewSingle";
 
 function App() {
 
-  const [apiUrl, setApiUrl] = useState("https://newsapi.org/v2/top-headlines?country=us&apiKey=dc575b5e0863400aacc7c1c5e409b6b7");
+  const apiUrl = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=dc575b5e0863400aacc7c1c5e409b6b7';
+
+  const [newsSource, setNewsSource] = useState(apiUrl);
+  const [filteredNews, setFilteredNews] = useState([]);
+
+  // useEffect(() => {
+  //     fetch(apiUrl,
+  //         {    
+  //             method: "GET",
+  //         })
+  //         .then((response) => response.json()) 
+  //         .then((data) => setFilteredNews(data.articles))
+  //         .catch(error => console.log(error));
+  // }, [newsSource]);
   
-  // const url = 'https://newsapi.org/v2/top-headlines?country=us&apiKey=dc575b5e0863400aacc7c1c5e409b6b7';
-  
-  // const handleSelection = value => () => {
-  //   console.log('we have reached the event handler');
-  //   let domainName = {value}
-  //   let newUrl = `https://newsapi.org/v2/everything?${domainName}&apiKey=dc575b5e0863400aacc7c1c5e409b6b7`
-  //   setApiUrl(newUrl);
-  // }
-  
-  const handleSelection = (event) => {
-    console.log('we have reached the event handler');
-    let domainName = {event}
+  const handleNewUrl = (event) => {
+    let domainName = event.target.value;
+    console.log(domainName);
     let newUrl = `https://newsapi.org/v2/everything?${domainName}&apiKey=dc575b5e0863400aacc7c1c5e409b6b7`
-    setApiUrl(newUrl);
+    setNewsSource(newUrl);
+  }
+
+  const populateNews = (filteredNews) => {
+    filteredNews.map((item) => (
+    <NewSingle key={item.url} item={item} />
+    ))
+  }
+
+  const handleFilteredList = (event) => {
+    setFilteredNews(populateNews(event.target.data));
   }
 
   return (
@@ -30,10 +45,11 @@ function App() {
         <p>Choose your News</p>  
       </header>
       <Selector 
-        apiURL={apiUrl} 
-        onChange={handleSelection}
+        newsArr={filteredNews} 
+        onClick={handleNewUrl}
         />
-      <News apiURL={apiUrl} />
+      <News newURL={newsSource} onFilter={handleFilteredList} />
+      
     </div>
   );
 }

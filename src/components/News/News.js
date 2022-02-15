@@ -1,42 +1,32 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import NewSingle from './NewSingle';
 
-class News extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            news: [],
-        };
-    }
+const News = props => {
 
-    componentDidMount() {
-        const url = this.props.apiURL; // get typeURL from Option selected
+    const [newsSource, setNewsSource] = useState(props.apiURL);
 
-        fetch(url)
-            .then((response) => {
-                return response.json();
-            })  
-            .then((data) => {
-                this.setState({
-                    news: data.articles
-                });
+    useEffect(() => {
+        fetch('https://newsapi.org/v2/top-headlines?country=us&apiKey=dc575b5e0863400aacc7c1c5e409b6b7',
+            {    
+                method: "GET",
             })
-            .catch((error) => console.log(error));
-    }
+            .then((response) => response.json()) 
+            .then((data) => setNewsSource(data.articles))
+            .catch(error => console.log(error));
+    }, [newsSource]);
 
-    renderItems() {
-        return this.state.news.map((item) => (
+    const renderItems = () => {
+        return newsSource.map((item) => (
             <NewSingle key={item.url} item={item} />
         ));
-    }
+    };
 
-    render() {
-        return (
-            <div className="row">
-                {this.renderItems()}
-            </div>
-        );
-    }
+    return (
+        <div className="row">
+            {renderItems}
+        </div>
+    );
+    
 }
 
 export default News;

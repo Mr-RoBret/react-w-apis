@@ -1,35 +1,40 @@
-import React, { Component } from "react";  
+import React, { useState, useEffect } from "react";  
 import Option from './Option';
 
-class Selector extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            options: [] 
-        };
-    } 
+const Selector = props => { 
+    const [options, setOptions] = useState('--');
 
-    // populate options[] with news categories from NewsAPI
-    componentDidMount() {
-        const url = this.props.apiURL;
-        //console.log(url);
-
-        fetch(url)
-            .then((response) => {
-                return response.json();
-            })  
-            .then((data) => {
-                this.setState({
-                    options: data.articles
-                })  
+    useEffect(() => {
+        fetch('https://newsapi.org/v2/top-headlines?country=us&apiKey=dc575b5e0863400aacc7c1c5e409b6b7',
+            {    
+                method: "GET",
             })
-            .catch((error) => console.log(error));
-    }
+            .then((res) => res.json()) 
+            .then((response) => setOptions(response.articles.source.name))
+            .catch(error => console.log(error));
+    }, [options]);
 
-    renderItems() {
+    // useEffect(() => {
+    //     fetch(apiUrl,
+    //         {    
+    //             method: "GET",
+    //         })
+    //         .then((response) => response.json()) 
+    //         .then((data) => setFilteredNews(data.articles))
+    //         .catch(error => console.log(error));
+    // }, [newsSource]);
+        
+
+    const handleSelection = (event) => {
+        console.log('we have reached the event handler');
+        let domainName = {event}
+        console.log(domainName);
+    };
+
+    const renderItems = () => {
         //map new array with source names only
         // const optionsNames = this.state.options.map((item) => item.source.name);
-        const optionsNames = this.state.options.map((item) => (item.source.name));
+        const optionsNames = options.map((item) => (item.source.name));
         console.log(optionsNames);
 
         //pare duplicates
@@ -38,19 +43,17 @@ class Selector extends Component {
 
         //return list of options using Options component
         return finalOptions.map((item) => (
-            <Option onChange={this.props.handleSelection} key={item} item={item} />
+            <Option onClick={handleSelection} key={item} item={item} />
         ));
-    }
+    };
 
-    render() {
-        return(
-            <div className="Options-dropdown">
-                <select className="Options-list" name="optionsList">
-                    {this.renderItems()}
-                </select>
-            </div>
-        );
-    }
-}
+    return (
+        <div className="Options-dropdown">
+            <select className="Options-list" name="optionsList">
+                {renderItems}
+            </select>
+        </div>
+    );
+};
 
 export default Selector;
